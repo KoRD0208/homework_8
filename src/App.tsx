@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import CreateItemForm from "./components/CreateItemForm";
+import Items from "./components/Items";
+import { ItemProps } from "./types";
 
 function App() {
+  let [items, setItems] = useState<any>([]);
+  let counter = 0;
+
+  function addItem(item: any) {
+    items.push({
+      id: counter,
+      item,
+      isPacked: true,
+    });
+    setItems(items);
+    counter++;
+    console.log(items);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <CreateItemForm addItem={addItem} />
+        <Items items={items} />
+      </div>
     </div>
   );
 }
