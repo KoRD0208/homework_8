@@ -10,15 +10,25 @@ interface ItemProp {
 
 function Item({ itemProps }: ItemProp) {
   return (
-    <div className="items__item">
+    <li className="items__item">
       <div className="items__props">
-        <input type="checkbox" className="items__check" />
+        <input
+          type="checkbox"
+          onChange={(e) => {
+            if (e.target.checked) {
+              itemProps.isPacked = false;
+            } else {
+              itemProps.isPacked = true;
+            }
+          }}
+          className="items__check"
+        />
         <label>{itemProps.item}</label>
       </div>
       <div className="items__remove">
         <button>Remove</button>
       </div>
-    </div>
+    </li>
   );
 }
 

@@ -3,14 +3,15 @@ import PackedItems from "./PackedItems";
 import Item from "./Item";
 import UnPackedItems from "./UnPackedItems";
 
-function Items({ items }: any) {
+function ListItems({ items, title }: any) {
   return (
-    <div className="items">
+    <ul className={title}>
+      <h2>{title}</h2>
       {items.map((item: any) => {
         return <Item itemProps={item} key={item.id} />;
       })}
-    </div>
+    </ul>
   );
 }
 
-export default Items;
+export default ListItems;

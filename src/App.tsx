@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import CreateItemForm from "./components/CreateItemForm";
-import Items from "./components/Items";
+import ListItems from "./components/ListItems";
 import { ItemProps } from "./types";
 
 function App() {
   let [items, setItems] = useState<any>([]);
   let counter = 0;
+  // let packedItems = [];
+  // let unpackedItems = [];
+
+  useEffect(() => {
+    console.log("yes");
+  });
 
   function addItem(item: any) {
     items.push({
-      id: counter,
+      id: Date.now(),
       item,
       isPacked: true,
     });
@@ -19,11 +25,26 @@ function App() {
     console.log(items);
   }
 
+  // function sortItems() {
+  //   items.forEach((item: any) => {
+  //     if (item.isPacked) {
+  //       unpackedItems.push(item);
+  //     } else {
+  //       packedItems.push(item);
+  //     }
+  //   });
+  // }
+
+  // const packContext = React.createContext(changePackStatus);
+
   return (
     <div className="App">
       <div className="container">
         <CreateItemForm addItem={addItem} />
-        <Items items={items} />
+        <div className="items">
+          <ListItems items={items} title="Packed Items" />
+          <ListItems items={items} title="Unpacked Items" />
+        </div>
       </div>
     </div>
   );
