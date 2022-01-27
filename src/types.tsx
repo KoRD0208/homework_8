@@ -5,5 +5,5 @@ export interface User {
 export interface ItemProps {
   id: number;
   item: string;
-  isPacked: boolean;
+  isUnpacked: boolean;
 }

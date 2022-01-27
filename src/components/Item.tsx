@@ -1,34 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 
-interface ItemProp {
-  itemProps: {
-    id: number;
-    item: string;
-    isPacked: boolean;
-  };
+interface ItemP {
+  id: number;
+  item: string;
+  isUnpacked: boolean;
 }
 
-function Item({ itemProps }: ItemProp) {
+interface ItemProp {
+  itemProps: ItemP;
+  getItem: (item: ItemP) => void;
+  removeElem: (elem: ItemP) => void;
+}
+
+function Item({ itemProps, getItem, removeElem }: ItemProp) {
+  const [deleted, setDeleted] = useState(false);
+
+  function handleChange(e: any) {
+    itemProps.isUnpacked = e.target.checked;
+    getItem(itemProps);
+  }
+
+  function removeItem() {
+    setDeleted(true);
+    // console.log(itemProps);
+    removeElem(itemProps);
+  }
+
   return (
-    <li className="items__item">
-      <div className="items__props">
-        <input
-          type="checkbox"
-          onChange={(e) => {
-            if (e.target.checked) {
-              itemProps.isPacked = false;
-            } else {
-              itemProps.isPacked = true;
-            }
-          }}
-          className="items__check"
-        />
-        <label>{itemProps.item}</label>
-      </div>
-      <div className="items__remove">
-        <button>Remove</button>
-      </div>
-    </li>
+    <>
+      {!deleted && (
+        <li className="items__item">
+          <div className="items__props">
+            <input
+              type="checkbox"
+              checked={itemProps.isUnpacked}
+              onChange={(e: any) => handleChange(e)}
+              className="items__check"
+            />
+            <label>{itemProps.item}</label>
+          </div>
+          <div className="items__remove">
+            <button onClick={removeItem}>Remove</button>
+          </div>
+        </li>
+      )}
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ function CreateItemForm({ addItem }: any) {
   function createItem(e: any) {
     e.preventDefault();
     addItem(inputValue);
+    setInputValue("");
   }
 
   function inputChange(value: string) {

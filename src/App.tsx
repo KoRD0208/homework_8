@@ -1,49 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import CreateItemForm from "./components/CreateItemForm";
 import ListItems from "./components/ListItems";
 import { ItemProps } from "./types";
+import MarkAsUnpacked from "./components/MarkAsUnpacked";
+
+// const packContext = React.createContext();
 
 function App() {
   let [items, setItems] = useState<any>([]);
-  let counter = 0;
-  // let packedItems = [];
-  // let unpackedItems = [];
 
-  useEffect(() => {
-    console.log("yes");
-  });
-
-  function addItem(item: any) {
-    items.push({
-      id: Date.now(),
-      item,
-      isPacked: true,
+  function addItem(item: any): void {
+    setItems((prevItems: any) => {
+      prevItems.push({
+        id: Date.now(),
+        item,
+        isUnpacked: false,
+      });
+      return [...prevItems];
     });
-    setItems(items);
-    counter++;
-    console.log(items);
+    // console.log(items);
   }
 
-  // function sortItems() {
-  //   items.forEach((item: any) => {
-  //     if (item.isPacked) {
-  //       unpackedItems.push(item);
-  //     } else {
-  //       packedItems.push(item);
-  //     }
-  //   });
-  // }
+  function getItem(item: any) {
+    console.log(item.isUnpacked);
+    setItems((prevItems: any) => {
+      prevItems.map((elem: any) => {
+        if (elem.id === item.id) {
+          elem.isUnpacked = item.isUnpacked;
+        }
+      });
+      // console.log(prevItems);
+      return [...prevItems];
+    });
+  }
 
-  // const packContext = React.createContext(changePackStatus);
+  function removeElem(elem: any) {
+    for (let i = 0; i < items.length; i++) {
+      if (elem.id === items[i].id) {
+        items.splice(i, 1);
+      }
+    }
+    console.log(items);
+  }
 
   return (
     <div className="App">
       <div className="container">
-        <CreateItemForm addItem={addItem} />
+        <CreateItemForm addItem={addItem} items={items} />
         <div className="items">
-          <ListItems items={items} title="Packed Items" />
-          <ListItems items={items} title="Unpacked Items" />
+          <div className="packed-items">
+            <ListItems
+              getItem={getItem}
+              removeElem={removeElem}
+              items={items.filter((item: any) => !item.isUnpacked)}
+              title="Packed Items"
+            />
+            <MarkAsUnpacked
+              items={items.filter((item: any) => !item.isUnpacked)}
+              getItem={getItem}
+            />
+          </div>
+          <ListItems
+            getItem={getItem}
+            removeElem={removeElem}
+            items={items.filter((item: any) => item.isUnpacked)}
+            title="Unpacked Items"
+          />
         </div>
       </div>
     </div>
