@@ -1,8 +1,10 @@
 import React from "react";
+import { ItemProps } from "../types";
+import { MarkedProps } from "../types";
 
-function MarkAsUnpacked({ items, getItem }: any) {
+function MarkAsUnpacked({ items, getItem }: MarkedProps) {
   function markAll() {
-    items.forEach((item: any) => {
+    items.forEach((item: ItemProps) => {
       item.isUnpacked = true;
       getItem(item);
     });

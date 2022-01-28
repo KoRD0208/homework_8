@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Item from "./Item";
 import Search from "./Search";
+import { ItemProps, ItemsHandlersProps } from "../types";
 
-function ListItems({ items, title, getItem, removeElem }: any) {
+function ListItems({ items, title, getItem, removeElem }: ItemsHandlersProps) {
   const [inputValue, setInputValue] = useState("");
 
   function checkChange(value: string) {
@@ -14,10 +15,10 @@ function ListItems({ items, title, getItem, removeElem }: any) {
       <h2>{title}</h2>
       <Search value={inputValue} checkChange={checkChange} />
       {items
-        .filter((item: any) =>
+        .filter((item: ItemProps) =>
           item.item.toLowerCase().includes(inputValue.toLowerCase())
         )
-        .map((item: any) => {
+        .map((item: ItemProps) => {
           return (
             <Item
               itemProps={item}

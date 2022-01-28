@@ -8,10 +8,10 @@ import MarkAsUnpacked from "./components/MarkAsUnpacked";
 // const packContext = React.createContext();
 
 function App() {
-  let [items, setItems] = useState<any>([]);
+  let [items, setItems] = useState<ItemProps[]>([]);
 
-  function addItem(item: any): void {
-    setItems((prevItems: any) => {
+  function addItem(item: string): void {
+    setItems((prevItems: ItemProps[]) => {
       prevItems.push({
         id: Date.now(),
         item,
@@ -19,35 +19,32 @@ function App() {
       });
       return [...prevItems];
     });
-    // console.log(items);
   }
 
-  function getItem(item: any) {
+  function getItem(item: ItemProps) {
     console.log(item.isUnpacked);
-    setItems((prevItems: any) => {
-      prevItems.map((elem: any) => {
+    setItems((prevItems: ItemProps[]) => {
+      prevItems.map((elem: ItemProps) => {
         if (elem.id === item.id) {
           elem.isUnpacked = item.isUnpacked;
         }
       });
-      // console.log(prevItems);
       return [...prevItems];
     });
   }
 
-  function removeElem(elem: any) {
+  function removeElem(elem: ItemProps) {
     for (let i = 0; i < items.length; i++) {
       if (elem.id === items[i].id) {
         items.splice(i, 1);
       }
     }
-    console.log(items);
   }
 
   return (
     <div className="App">
       <div className="container">
-        <CreateItemForm addItem={addItem} items={items} />
+        <CreateItemForm addItem={addItem} />
         <div className="items">
           <div className="packed-items">
             <ListItems

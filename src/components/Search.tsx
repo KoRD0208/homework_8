@@ -1,7 +1,8 @@
 import React from "react";
 import { TextField } from "@mui/material";
+import { SearchProps } from "../types";
 
-function Search({ value, checkChange }: any) {
+function Search({ value, checkChange }: SearchProps) {
   function handleChange(
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ): void {
@@ -15,7 +16,7 @@ function Search({ value, checkChange }: any) {
       label="Enter a name:"
       value={value}
       name="search"
-      onChange={(e) => handleChange(e)}
+      onChange={handleChange}
       className="search"
       placeholder="Name"
       sx={{ marginTop: 3, marginBottom: 3, marginRight: 6 }}

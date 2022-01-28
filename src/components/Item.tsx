@@ -1,22 +1,12 @@
 import React, { useState } from "react";
+import { ItemHandlersProps } from "../types";
 
-interface ItemP {
-  id: number;
-  item: string;
-  isUnpacked: boolean;
-}
-
-interface ItemProp {
-  itemProps: ItemP;
-  getItem: (item: ItemP) => void;
-  removeElem: (elem: ItemP) => void;
-}
-
-function Item({ itemProps, getItem, removeElem }: ItemProp) {
+function Item({ itemProps, getItem, removeElem }: ItemHandlersProps) {
   const [deleted, setDeleted] = useState(false);
 
-  function handleChange(e: any) {
-    itemProps.isUnpacked = e.target.checked;
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const target = e.target;
+    itemProps.isUnpacked = target.checked;
     getItem(itemProps);
   }
 
@@ -34,7 +24,7 @@ function Item({ itemProps, getItem, removeElem }: ItemProp) {
             <input
               type="checkbox"
               checked={itemProps.isUnpacked}
-              onChange={(e: any) => handleChange(e)}
+              onChange={handleChange}
               className="items__check"
             />
             <label>{itemProps.item}</label>

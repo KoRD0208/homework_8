@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import CreateInput from "./CreateInput";
 import CreateButton from "./CreateButton";
+import { addItemType } from "../types";
 
-function CreateItemForm({ addItem }: any) {
+function CreateItemForm({ addItem }: addItemType) {
   let [inputValue, setInputValue] = useState("");
 
-  function createItem(e: any) {
+  function createItem(e: React.SyntheticEvent): void {
     e.preventDefault();
     addItem(inputValue);
     setInputValue("");
