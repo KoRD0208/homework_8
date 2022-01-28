@@ -2,6 +2,12 @@ export interface User {
   name: string;
 }
 
+export interface CreateInputProps {
+  value: string;
+  checkInput: (value: string) => void;
+}
+
+
 export interface addItemType {
   addItem: (item: string) =>  void;
 }

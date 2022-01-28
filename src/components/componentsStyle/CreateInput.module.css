@@ -1,4 +1,44 @@
-.createInput {
-   width: 450px;
-   height: 60px;
+.CreateBlock {
+   position: relative;
+   display: inline-block;
+}
+
+.CreateInput {
+   /* position: absolute;
+   left: 0;
+   top: 0; */
+   width: 240px;
+   height: 38px;
+   padding-left: 6px;
+   font-size: 16px;
+   border: rgb(33, 182, 93) 1px solid;
+   border-radius: 4px;
+}
+
+.CreateInput:hover {
+   outline: rgb(46, 223, 117) 1px solid;
+}
+
+.CreateInput:focus {
+   outline: rgb(33, 182, 93) 1px solid;
+}
+
+.CreateLabel {
+   position: absolute;
+   left: 6px;
+   top: 6px;
+   color: rgba(0, 0, 0, .6 );
+   background: #fff;
+   font-size: 18px;
+   cursor: text;
+   transition: top .2s ease-in, 
+      left .2s ease-in, 
+      font-size .2s ease-in;
+}
+
+.CreateInput:focus ~ .CreateLabel,
+.CreateInput:not(:placeholder-shown).CreateInput:not(:focus)~ .CreateLabel {
+   top: -0.6rem;
+   left: 0.5rem;
+   font-size: 14px;
 }

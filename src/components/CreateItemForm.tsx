@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CreateInput from "./CreateInput";
 import CreateButton from "./CreateButton";
 import { addItemType } from "../types";
+import classes from "./componentsStyle/CreateForm.module.css";
 
 function CreateItemForm({ addItem }: addItemType) {
   let [inputValue, setInputValue] = useState("");
@@ -18,7 +19,7 @@ function CreateItemForm({ addItem }: addItemType) {
 
   return (
     <div className="create-item-form">
-      <form className="form" onSubmit={(e) => createItem(e)}>
+      <form className={classes.CreateForm} onSubmit={(e) => createItem(e)}>
         <CreateInput value={inputValue} checkInput={inputChange} />
         <CreateButton>Create</CreateButton>
       </form>

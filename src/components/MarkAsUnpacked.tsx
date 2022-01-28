@@ -1,6 +1,7 @@
 import React from "react";
 import { ItemProps } from "../types";
 import { MarkedProps } from "../types";
+import { Button } from "@mui/material";
 
 function MarkAsUnpacked({ items, getItem }: MarkedProps) {
   function markAll() {
@@ -10,7 +11,11 @@ function MarkAsUnpacked({ items, getItem }: MarkedProps) {
     });
   }
 
-  return <button onClick={markAll}>Mark All as unpacked</button>;
+  return (
+    <Button variant="outlined" onClick={markAll}>
+      Mark All as unpacked
+    </Button>
+  );
 }
 
 export default MarkAsUnpacked;
